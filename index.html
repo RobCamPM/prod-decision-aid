@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrEP Decision Aid Tool</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="images/logo.png" alt="Logo" class="logo">
+        </header>
+        <h1>PrEP On Demand Decision Aid Tool</h1>
+        <div class="progress-bar">
+            <div></div>
+            <div class="progress-steps">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <form id="decisionAidForm">
+            <!-- Intro Step -->
+            <div class="step auto-progress" id="introStep">
+                <div class="card info">
+                    <h3>Welcome to the PrEP On Demand Decision Aid Tool</h3>
+                    <p>This tool will help you make an informed decision about whether to take PrEP on demand or daily.</p>
+                    <button type="button" onclick="nextStep('introStep')">Get Started</button>
+                </div>
+            </div>
+
+            <!-- Step 1: What type of PrEP medication are you taking? -->
+            <div class="step" id="step1" style="display:none;">
+                <div class="card">
+                    <h3>What type of PrEP medication are you taking?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption('medication', 'Truvada', 'step1')">
+                            <i class="fas fa-pills"></i> Truvada
+                        </div>
+                        <div class="option" onclick="selectOption('medication', 'Descovy', 'step1')">
+                            <i class="fas fa-capsules"></i> Descovy
+                        </div>
+                        <div class="option" onclick="selectOption('medication', 'NotTaking', 'step1')">
+                            <i class="fas fa-prescription-bottle"></i> I'm not taking PrEP currently
+                        </div>
+                    </div>
+                    <button type="button" class="back-button" onclick="prevStep('step1')">Back</button>
+                </div>
+            </div>
+
+            <!-- Step 2: What type of sex are you going to be having? -->
+            <div class="step" id="step2" style="display:none;">
+                <div class="card">
+                    <h3>What type of sex are you going to be having?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption('sexType', 'Anal', 'step2')">
+                            <i class="fas fa-male"></i> Anal
+                        </div>
+                        <div class="option" onclick="selectOption('sexType', 'Vaginal', 'step2')">
+                            <i class="fas fa-female"></i> Vaginal/front
+                        </div>
+                        <div class="option" onclick="selectOption('sexType', 'Both', 'step2')">
+                            <i class="fas fa-venus-mars"></i> Both
+                        </div>
+                    </div>
+                    <button type="button" class="back-button" onclick="prevStep('step2')">Back</button>
+                </div>
+            </div>
+
+            <!-- Step 3: How well do you understand the dosing regimen for PrEP on demand? -->
+            <div class="step" id="step3" style="display:none;">
+                <div class="card">
+                    <h3>How well do you understand the dosing regimen for PrEP on demand?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption('dosingUnderstanding', 'VeryWell', 'step3')">
+                            <i class="fas fa-check"></i> Very well, I know about 2 - 1 - 1
+                        </div>
+                        <div class="option" onclick="selectOption('dosingUnderstanding', 'Somewhat', 'step3')">
+                            <i class="fas fa-question"></i> I think I understand, but I'm not sure
+                        </div>
+                        <div class="option" onclick="selectOption('dosingUnderstanding', 'NoIdea', 'step3')">
+                            <i class="fas fa-times"></i> I have no idea
+                        </div>
+                    </div>
+                    <button type="button" class="back-button" onclick="prevStep('step3')">Back</button>
+                </div>
+            </div>
+
+            <!-- Step 4: How frequently do you have sex? -->
+            <div class="step" id="step4" style="display:none;">
+                <div class="card">
+                    <h3>How frequently do you have sex?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption('frequency', 'frequent', 'step4')">
+                            <i class="fas fa-calendar-day"></i> Frequently
+                        </div>
+                        <div class="option" onclick="selectOption('frequency', 'infrequent', 'step4')">
+                            <i class="fas fa-calendar-alt"></i> Infrequently
+                        </div>
+                    </div>
+                    <button type="button" class="back-button" onclick="prevStep('step4')">Back</button>
+                </div>
+            </div>
+
+            <!-- Step 5: Can you plan your sexual activity in advance? -->
+            <div class="step" id="step5" style="display:none;">
+                <div class="card">
+                    <h3>Can you plan your sexual activity in advance?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption('planning', 'yes', 'step5')">
+                            <i class="fas fa-check"></i> Yes
+                        </div>
+                        <div class="option" onclick="selectOption('planning', 'no', 'step5')">
+                            <i class="fas fa-times"></i> No
+                        </div>
+                    </div>
+                    <button type="button" class="back-button" onclick="prevStep('step5')">Back</button>
+                </div>
+            </div>
+
+            <!-- Step 6: How concerned are you about the cost of PrEP? -->
+            <div class="step" id="step6" style="display:none;">
+                <div class="card">
+                    <h3>How concerned are you about the cost of PrEP?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption('cost', 'very', 'step6')">
+                            <i class="fas fa-dollar-sign"></i> Very concerned
+                        </div>
+                        <div class="option" onclick="selectOption('cost', 'somewhat', 'step6')">
+                            <i class="fas fa-money-bill-wave"></i> Somewhat concerned
+                        </div>
+                        <div class="option" onclick="selectOption('cost', 'not', 'step6')">
+                            <i class="fas fa-wallet"></i> Not concerned
+                        </div>
+                    </div>
+                    <button type="button" class="back-button" onclick="prevStep('step6')">Back</button>
+                </div>
+            </div>
+
+            <!-- Step 7: How comfortable are you with taking medication daily? -->
+            <div class="step" id="step7" style="display:none;">
+                <div class="card">
+                    <h3>How comfortable are you with taking medication daily?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption('dailyComfort', 'very', 'step7')">
+                            <i class="fas fa-pills"></i> Very comfortable
+                        </div>
+                        <div class="option" onclick="selectOption('dailyComfort', 'somewhat', 'step7')">
+                            <i class="fas fa-tablet-alt"></i> Somewhat comfortable
+                        </div>
+                        <div class="option" onclick="selectOption('dailyComfort', 'not', 'step7')">
+                            <i class="fas fa-capsules"></i> Not comfortable
+                        </div>
+                    </div>
+                    <button type="button" class="back-button" onclick="prevStep('step7')">Back</button>
+                </div>
+            </div>
+
+            <!-- Step 8: How important is consistent protection to you? -->
+            <div class="step" id="step8" style="display:none;">
+                <div class="card">
+                    <h3>How important is consistent protection to you?</h3>
+                    <div class="options">
+                        <div class="option" onclick="selectOption('protection', 'very', 'step8')">
+                            <i class="fas fa-shield-alt"></i> Very important
+                        </div>
+                        <div class="option" onclick="selectOption('protection', 'somewhat', 'step8')">
+                            <i class="fas fa-shield"></i> Somewhat important
+                        </div>
+                        <div class="option" onclick="selectOption('protection', 'not', 'step8')">
+                            <i class="fas fa-user-shield"></i> Not important
+                        </div>
+                    </div>
+                    <button type="button" class="back-button" onclick="prevStep('step8')">Back</button>
+                </div>
+            </div>
+
+            <!-- Summary Step -->
+            <div class="step" id="summaryStep" style="display:none;">
+                <h3>Summary</h3>
+                <p>Review your responses before submitting:</p>
+                <div id="summaryContent"></div>
+                <button type="button" onclick="prevStep('summaryStep')">Back</button>
+                <button type="button" onclick="submitForm()">Submit</button>
+                <button type="button" class="restart-button" onclick="restart()">Restart</button>
+            </div>
+        </form>
+        <div id="result" style="display:none;"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
